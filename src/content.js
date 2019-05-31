@@ -71,6 +71,13 @@
   }
 
   function init() {
+    chrome.storage.sync.get(['saveButton'], function(result) {
+      if (!!result.saveButton) {
+        addSaveButtons();
+        addListeners();
+      }
+    });
+
     chrome.storage.onChanged.addListener(function(changes) {
       if (typeof changes.saveButton !== 'undefined') {
         if (!!changes.saveButton.newValue) {
