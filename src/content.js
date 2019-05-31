@@ -37,6 +37,15 @@
     });
   }
 
+  function removeSaveButtons() {
+    const allSaveButtons = document.querySelectorAll('.ig-saveButton');
+
+    allSaveButtons.forEach(element => {
+      element.parentElement.classList.remove('instaghost-hasSaveButton');
+      element.remove();
+    });
+  }
+
   function clickListener(event) {
     if (
       event.target.classList.contains('ig-saveButton') ||
@@ -51,11 +60,29 @@
     }
   }
 
-  function init() {
-    addSaveButtons();
-
+  function addListeners() {
     document.addEventListener('DOMSubtreeModified', domModificationCallback);
     document.addEventListener('click', clickListener);
+  }
+
+  function removeListeners() {
+    document.removeEventListener('DOMSubtreeModified', domModificationCallback);
+    document.removeEventListener('click', clickListener);
+  }
+
+  function init() {
+    chrome.storage.onChanged.addListener(function(changes) {
+      if (typeof changes.saveButton !== 'undefined') {
+        if (!!changes.saveButton.newValue) {
+          removeListeners();
+          addSaveButtons();
+          addListeners();
+        } else {
+          removeListeners();
+          removeSaveButtons();
+        }
+      }
+    });
   }
 
   init();
