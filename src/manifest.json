@@ -13,9 +13,9 @@
     "declarativeContent",
     "*://*.instagram.com/*",
     "*://instagram.com/*",
-    "storage"
+    "storage",
+    "downloads"
   ],
-  
   "icons": {
     "16": "images/instaghost_logo16.png",
     "32": "images/instaghost_logo32.png",
@@ -31,5 +31,13 @@
       "48": "images/instaghost_logo48.png",
       "128": "images/instaghost_logo128.png"
     }
-}
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*.instagram.com/*", "https://*.instagram.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "web_accessible_resources": ["images/*"]
 }

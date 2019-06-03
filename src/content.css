@@ -1,0 +1,24 @@
+.ig-saveButton {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  padding: 5px;
+  z-index: 9999;
+  border-radius: 5px;
+  background: black;
+  opacity: 0.5;
+}
+
+.ig-saveButton:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.ig-saveButton:active {
+  transform: scale(1.05);
+}
+
+.ig-saveButton__image {
+  opacity: 0.8;
+  width: 15px;
+}

@@ -33,6 +33,7 @@ function switchSecretStoryMode(enable = true) {
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({
     secretMode: true,
+    saveButton: false,
   });
 
   switchSecretStoryMode(true);
@@ -44,4 +45,12 @@ chrome.runtime.onInstalled.addListener(function() {
       }
     }
   });
+});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  if (request.type == 'saveImage') {
+    chrome.downloads.download({
+      url: request.url,
+    });
+  }
 });
